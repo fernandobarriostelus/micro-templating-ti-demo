@@ -1,0 +1,12 @@
+<!--    <%= variableAImprimir %>       -->
+<!--    <%  codigoJSAEjecutar %>       -->
+
+<h1> Welcome to the <%= page.pageTitle %> page </h1>
+<h3> This is the list of team members in TI: </h3><br>
+<ul>  
+    <% for (var i=0; i < page.teammembers.length; i++) { %>    
+    
+    <li><%= page.teammembers[i] %></li>  
+    
+    <% } %>  
+</ul>

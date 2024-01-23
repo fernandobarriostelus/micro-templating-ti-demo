@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link ...botstrap />
+  </head>
+  <body>
+
+    <script type="text/template" id="generalTemplate">
+      <h1 class="btn btn-primary"> Welcome to the <%= data.pageTitle %> page </h1>
+      <h3> This is the list of team members in TI: </h3>
+      <ul>  
+          <% for (var i=0; i < data.teammembers.length; i++) { %>    
+          <li><%= data.teammembers[i] %></li>  
+          <% } %>  
+      </ul>
+    </script>
+
+    <script>
+      var template = document.getElementById('generalTemplate')
+      var templateText = template.textContent
+      const render = Templater(templateText)
+      const data = {
+        pageTitle: 'Home',
+        teammembers: ['John', 'Jane', 'Jack', 'Jill']
+      }
+
+      document.body.innerHTML = render(data)
+
+
+
+
+
+
+      function Templater(templateText) {
+        return new Function(
+          'data',
+          'var output=' +
+            JSON.stringify(templateText)
+              .replace(/<%=(.+?)%>/g, '"+($1)+"')
+              .replace(/<%(.+?)%>/g, '";$1\noutput+="') +
+            ';return output;'
+        )
+      }
+    </script>
+  </body>
+</html>
